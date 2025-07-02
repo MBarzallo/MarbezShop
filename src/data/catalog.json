@@ -1,0 +1,269 @@
+{
+  "categories": [
+    {
+      "id": "mascotas",
+      "title": "MASCOTAS",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": "/images/categories/mascotas.png",
+      "logo": "/images/lines/pets.png"
+    },
+    {
+      "id": "tecnologia",
+      "title": "TECNOLOGÍA",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": "/images/categories/tecnologia.png",
+      "logo": "/images/lines/tech.png"
+    },
+    {
+      "id": "mecanica",
+      "title": "MECANICA",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": "/images/categories/mecanica.png",
+      "logo": "/images/lines/motors.png"
+    },
+    {
+      "id": "cosmeticos",
+      "title": "COSMETICOS",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": "/images/categories/cosmeticos.png",
+      "logo": "/images/lines/cosmetics.png"
+    }
+  ],
+  "products": [
+    {
+      "id": "bozal-de-cuero-premium",
+      "title": "Bozal de Cuero Premium",
+      "description": "Elegancia, seguridad y comfort en un solo accesorio. Fabricado con cuero genuino, cosido a mano y con herrajes de acero inoxidable, este bozal ofrece un ajuste cómodo y firme. Ideal para paseos, entrenamiento o visitas al veterinario.",
+      "basePrice": 35.0,
+      "category": "mascotas",
+      "images":[
+        "/images/products/bozal-de-cuero-premium.png"
+      ],
+      "options": [
+        {
+          "name": "Talla",
+          "values": ["M", "L", "XL"]
+        },
+        {
+          "name": "Color",
+          "values": ["Negro", "Café"]
+        }
+      ],
+
+      "variants": [
+        {
+          "optionValues": { "Talla": "M", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "M", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Café" },
+          "price": 35.0
+        }
+      ]
+    },
+    {
+      "id": "bozal-de-seguridad",
+      "title": "Bozal de Seguridad",
+      "description": "Elegancia, seguridad y comfort en un solo accesorio. Fabricado con cuero genuino, cosido a mano y con herrajes de acero inoxidable, este bozal ofrece un ajuste cómodo y firme. Ideal para paseos, entrenamiento o visitas al veterinario.",
+      "basePrice": 25.0,
+      "category": "mascotas",
+        "images":[
+            "/images/products/bozal-de-seguridad.png"
+        ],
+      "options": [
+        {
+          "name": "Talla",
+          "values": ["M", "L", "XL"]
+        },
+        {
+          "name": "Color",
+          "values": ["Negro", "Café"]
+        }
+      ],
+
+      "variants": [
+        {
+          "optionValues": { "Talla": "M", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "M", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Café" },
+          "price": 35.0
+        }
+      ]
+    },
+    {
+      "id": "bozal-de-seguridad-1",
+      "title": "Bozal de Seguridad",
+      "description": "Elegancia, seguridad y comfort en un solo accesorio. Fabricado con cuero genuino, cosido a mano y con herrajes de acero inoxidable, este bozal ofrece un ajuste cómodo y firme. Ideal para paseos, entrenamiento o visitas al veterinario.",
+      "basePrice": 15.0,
+      "category": "mascotas",
+        "images":[
+            "/images/products/bozal-de-seguridad-1.png"
+        ],
+      "options": [
+        {
+          "name": "Talla",
+          "values": ["M", "L", "XL"]
+        },
+        {
+          "name": "Color",
+          "values": ["Negro", "Café"]
+        }
+      ],
+
+      "variants": [
+        {
+          "optionValues": { "Talla": "M", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "M", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Café" },
+          "price": 35.0
+        }
+      ]
+    },
+    {
+      "id": "arnes-deportivo",
+      "title": "ARNÉS DEPORTIVO",
+      "description": "Elegancia, seguridad y comfort en un solo accesorio. Fabricado con cuero genuino, cosido a mano y con herrajes de acero inoxidable, este bozal ofrece un ajuste cómodo y firme. Ideal para paseos, entrenamiento o visitas al veterinario.",
+      "basePrice": 15.0,
+      "category": "mascotas",
+        "images":[
+            "/images/products/arnes-deportivo.png"
+        ],
+      "options": [
+        {
+          "name": "Talla",
+          "values": ["M", "L", "XL"]
+        },
+        {
+          "name": "Color",
+          "values": ["Negro", "Café"]
+        }
+      ],
+
+      "variants": [
+        {
+          "optionValues": { "Talla": "M", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "M", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Café" },
+          "price": 35.0
+        }
+      ]
+    },
+    {
+      "id": "arnes-deportivo-1",
+      "title": "ARNÉS DEPORTIVO",
+      "description": "Elegancia, seguridad y comfort en un solo accesorio. Fabricado con cuero genuino, cosido a mano y con herrajes de acero inoxidable, este bozal ofrece un ajuste cómodo y firme. Ideal para paseos, entrenamiento o visitas al veterinario.",
+      "basePrice": 15.0,
+      "category": "mascotas",
+        "images":[
+            "/images/products/arnes-deportivo-1.png"
+        ],
+      "options": [
+        {
+          "name": "Talla",
+          "values": ["M", "L", "XL"]
+        },
+        {
+          "name": "Color",
+          "values": ["Negro", "Café"]
+        }
+      ],
+
+      "variants": [
+        {
+          "optionValues": { "Talla": "M", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "M", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "L", "Color": "Café" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Negro" },
+          "price": 35.0
+        },
+        {
+          "optionValues": { "Talla": "XL", "Color": "Café" },
+          "price": 35.0
+        }
+      ]
+    }
+  ]
+}

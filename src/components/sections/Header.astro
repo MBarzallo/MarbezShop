@@ -4,6 +4,7 @@ import Instagram from "../../assets/social-media/instagram.svg";
 import TikTok from "../../assets/social-media/tiktok.svg";
 import X from "../../assets/social-media/twitter.svg";
 import LogoHorizontal from "../../assets/logos/logo-horizontal.png";
+const current = Astro.url.pathname; 
 ---
 
 <header class="w-full">
@@ -66,9 +67,41 @@ import LogoHorizontal from "../../assets/logos/logo-horizontal.png";
     </div>
     <!-- Nav links -->
     <nav class="flex gap-8 font-semibold text-black text-sm">
-      <a href="#" class="border-b-4 border-yellow-400 pb-1">INICIO</a>
-      <a href="#" class="hover:text-yellow-500">PRODUCTOS</a>
-      <a href="#" class="hover:text-yellow-500">BLOG</a>
-    </nav>
+  <a
+    href="/"
+    class={`
+      pb-1
+      ${current === "/" 
+        ? "border-b-4 border-yellow-400 text-yellow-500" 
+        : "hover:text-yellow-500"}
+    `}
+  >
+    INICIO
+  </a>
+
+  <a
+    href="/categories"
+    class={`
+      pb-1
+      ${current.startsWith("/categories") || current.startsWith("/category") || current.startsWith("/product")
+        ? "border-b-4 border-yellow-400 text-yellow-500" 
+        : "hover:text-yellow-500"}
+    `}
+  >
+    PRODUCTOS
+  </a>
+
+  <a
+    href="/blog"
+    class={`
+      pb-1
+      ${current === "/blog" 
+        ? "border-b-4 border-yellow-400 text-yellow-500" 
+        : "hover:text-yellow-500"}
+    `}
+  >
+    BLOG
+  </a>
+</nav>
   </div>
 </header>

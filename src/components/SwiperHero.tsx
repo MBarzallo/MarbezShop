@@ -2,6 +2,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import logo from "../assets/logos/logo-solo-blanco.png";
+import LogoBlanco from "../assets/logos/logo-blanco.png";
 import Camion from "../assets/images/camion.png";
 import Chica from "../assets/images/chica.png";
 import "swiper/css";
@@ -9,17 +10,17 @@ import "swiper/css/pagination";
 
 export default function SwiperHero() {
   return (
-    <div className="w-full bg-principal h-full">
+    <div className="w-full bg-principal h-[calc(100vh-160px)]">
       <Swiper
         modules={[Pagination]}
         loop={true}
         pagination={{ clickable: true }}
-        className="w-full h-full "
+        className="w-full h-full"
       >
         <SwiperSlide>
           <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-12 gap-12 h-full">
             {/* Texto + Logo */}
-            <div className="flex flex-col items-center justify-center text-white text-center gap-6 w-full md:w-1/2 ml-20">
+            <div className="flex flex-col items-center justify-center text-white text-center gap-6 w-full md:w-1/2 px-6 md:px-20">
               <img src={logo.src} alt="Logo" className="w-28" />
               <p className="text-3xl  font-light leading-relaxed text-start">
                 Tu tienda de confianza para compras rápidas y triangulaciones
@@ -29,9 +30,9 @@ export default function SwiperHero() {
                 Explora, elige y recibe — todo desde un solo lugar.
               </p>
               <div className="flex w-full mt-20 flex-wrap justify-between">
-                <button className="bg-[#FFC72C] hover:bg-yellow-400 text-white font-bold px-15 py-3 rounded text-3xl shadow-md">
+                <a href="/categories" className="bg-[#FFC72C] hover:bg-yellow-400 text-white font-bold px-15 py-3 rounded text-3xl shadow-md">
                   COMPRAR
-                </button>
+                </a>
                 <button className="bg-[#FFC72C] hover:bg-yellow-400 text-white font-bold px-15 py-3 rounded text-3xl shadow-md">
                   TRIANGULAR
                 </button>
@@ -49,13 +50,13 @@ export default function SwiperHero() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20  gap-12 h-full ">
+          <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20  gap-12 h-full">
             {/* Texto + Logo */}
             <div className="flex flex-col items-center justify-center text-white gap-6 w-full  max-w-4xl text-center md:text-left ">
               <div className="flex flex-col items-center md:items-start gap-2">
-                <img src={logo.src} alt="Logo" className="w-28" />
+                <img src={LogoBlanco.src} alt="Logo" className="w-full mb-10" />
                 
-              </div>
+              </div> 
               <h2 className="text-yellow-400 font-bold text-5xl">
                   Quienes somos
                 </h2>
