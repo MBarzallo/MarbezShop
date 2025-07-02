@@ -10,16 +10,17 @@ import { ClientRouter } from "astro:transitions";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <ClientRouter />
     <title>MarbezShop</title>
   </head>
-  <body class="h-screen flex flex-col">
+  <body class="w-full max-w-full">
     <Header />
     <div
       id="earlyAccessPopup"
-      class="fixed inset-0 hidden items-center justify-center z-50 text-white"
+      class="fixed inset-0 hidden items-center justify-center z-50 text-white w-full"
     >
       <form
         id="earlyAccessForm"
@@ -32,7 +33,11 @@ import { ClientRouter } from "astro:transitions";
           Registrate para acceder a la lista de espera
         </p>
         <div class="flex items-center mb-4">
-          <label for="ea-email" class="w-50 text-end mr-4 font-semibold uppercase text-2xl">Correo:</label>
+          <label
+            for="ea-email"
+            class="w-50 text-end mr-4 font-semibold uppercase text-2xl"
+            >Correo:</label
+          >
           <input
             id="ea-email"
             type="email"
@@ -49,7 +54,11 @@ import { ClientRouter } from "astro:transitions";
         </div>
 
         <div class="flex items-center mb-4">
-          <label for="ea-nombres" class="w-50 text-end mr-4 font-semibold uppercase text-2xl">Nombres:</label>
+          <label
+            for="ea-nombres"
+            class="w-50 text-end mr-4 font-semibold uppercase text-2xl"
+            >Nombres:</label
+          >
           <input
             id="ea-nombres"
             type="text"
@@ -66,7 +75,10 @@ import { ClientRouter } from "astro:transitions";
         </div>
 
         <div class="flex items-center mb-6">
-          <label for="ea-apellidos" class="w-50 text-end mr-4 font-semibold uppercase text-2xl">Apellidos:</label
+          <label
+            for="ea-apellidos"
+            class="w-50 text-end mr-4 font-semibold uppercase text-2xl"
+            >Apellidos:</label
           >
           <input
             id="ea-apellidos"
@@ -84,86 +96,89 @@ import { ClientRouter } from "astro:transitions";
         </div>
 
         <div class="flex justify-center">
-			<button
-          type="submit"
-          class="
-      bg-secundario hover:bg-yellow-600
+          <button
+            type="submit"
+            class="bg-secundario hover:bg-yellow-600
       text-white font-bold
       py-2
       rounded w-56"
-        >
-          ENVIAR
-        </button>
-		</div>
+          >
+            ENVIAR
+          </button>
+        </div>
       </form>
     </div>
-    <main>
-      <slot />
-    </main>
-  </body><script type="module">
-    document.addEventListener("DOMContentLoaded", () => {
-      // Elementos del DOM
-      const popup = document.getElementById("earlyAccessPopup");
-      const form = document.getElementById("earlyAccessForm");
-      const inputEmail = document.getElementById("ea-email");
-      const inputNombres = document.getElementById("ea-nombres");
-      const inputApellidos = document.getElementById("ea-apellidos");
 
-      // Si alguno falta, no seguimos
-      if (!popup || !form || !inputEmail || !inputNombres || !inputApellidos) {
-        return;
-      }
-
-      const already = localStorage.getItem("ea_submitted") === "yes";
-
-      // Fechas límite
-      const start = new Date("2025-07-02T00:00:00");
-      const end = new Date("2025-07-20T23:59:59");
-      const now = new Date();
-
-      // Mostrar popup solo si estamos en rango y no se envió aún
-      if (!already && now >= start && now <= end) {
-        popup.classList.remove("hidden");
-        popup.classList.add("flex");
-      }
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const data = {
-          correo: inputEmail.value.trim(),
-          nombres: inputNombres.value.trim(),
-          apellidos: inputApellidos.value.trim(),
-          date: now.toISOString(),
-        };
-
-        try {
-          await fetch(
-            "https://script.google.com/macros/s/AKfycbzBP8jBV7V2v2elzV_4O3uggl5z-sxoUsXUCHJVJ06xGa_yi-WlcNx9X9aVGnDv69Oadw/exec",
-            {
-              method: "POST",
-              mode: "no-cors",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            }
-          );
-          localStorage.setItem("ea_submitted", "yes");
-          popup.classList.add("hidden");
-        } catch (err) {
-          console.error("Error enviando datos:", err);
-          alert("Hubo un error. Por favor inténtalo de nuevo.");
-        }
-      });
-    });
-  </script>
+    <div class="w-full">
+		<slot />
+	</div>
+  </body>
 </html>
 
 <style>
   html,
   body {
     margin: 0;
-    padding: 0;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 </style>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    // Elementos del DOM
+    const popup = document.getElementById("earlyAccessPopup");
+    const form = document.getElementById("earlyAccessForm");
+    const inputEmail = document.getElementById("ea-email");
+    const inputNombres = document.getElementById("ea-nombres");
+    const inputApellidos = document.getElementById("ea-apellidos");
+
+    // Si alguno falta, no seguimos
+    if (!popup || !form || !inputEmail || !inputNombres || !inputApellidos) {
+      return;
+    }
+
+    const already = localStorage.getItem("ea_submitted") === "yes";
+
+    // Fechas límite
+    const start = new Date("2025-07-02T00:00:00");
+    const end = new Date("2025-07-20T23:59:59");
+    const now = new Date();
+
+    // Mostrar popup solo si estamos en rango y no se envió aún
+    if (!already && now >= start && now <= end) {
+      popup.classList.remove("hidden");
+      popup.classList.add("flex");
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        correo: inputEmail.value.trim(),
+        nombres: inputNombres.value.trim(),
+        apellidos: inputApellidos.value.trim(),
+        date: now.toISOString(),
+      };
+
+      try {
+        await fetch(
+          "https://script.google.com/macros/s/AKfycbzBP8jBV7V2v2elzV_4O3uggl5z-sxoUsXUCHJVJ06xGa_yi-WlcNx9X9aVGnDv69Oadw/exec",
+          {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+        localStorage.setItem("ea_submitted", "yes");
+        popup.classList.add("hidden");
+      } catch (err) {
+        console.error("Error enviando datos:", err);
+        alert("Hubo un error. Por favor inténtalo de nuevo.");
+      }
+    });
+  });
+</script>

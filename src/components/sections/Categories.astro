@@ -13,30 +13,32 @@ const categories = data.categories;
     nemo veritatis ipsum placeat doloremque sit omnis reprehenderit ea quas,
     aliquam nostrum dicta! Voluptatem nisi quasi qui illo assumenda distinctio.
   </p>
-  <div class="flex">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full justify-items-center mx-10"
+  >
     {
       categories.map((cat) => (
-        <div class="flex flex-col items-center justify-center gap-5 w-1/4 p-4">
+        <div class="flex flex-col items-center justify-center gap-5  p-4 w-full">
           <img
             src={cat.image}
             alt={cat.title}
-            class="h-72  object-cover rounded"
+            class="h-72  object-contain rounded"
           />
 
-          <div class="relative bg-gray-100 rounded p-10 text-center">
+          <div class="relative bg-gray-100 rounded p-10 text-center h-80">
             <img
               src={star.src}
               alt="estrella"
               class="
-          absolute
-          -top-14
-          left-1/2
-          transform -translate-x-1/2
-          p-2
-          rounded-full
-          w-25 h-25
-          z-10
-        "
+                absolute
+                -top-14
+                left-1/2
+                transform -translate-x-1/2
+                p-2
+                rounded-full
+                w-25 h-25
+                z-10
+                "
             />
 
             <h2 class="text-4xl">{cat.title}</h2>
