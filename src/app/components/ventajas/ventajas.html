@@ -1,39 +1,26 @@
-<section class="w-full py-16 sm:py-20 lg:py-28">
+<section class="w-full py-12 sm:py-16 lg:py-24">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-    <h2 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-center">
-      <span class="text-black uppercase">Nuestras</span>
-      <span class="text-secundario uppercase">ventajas</span>
+    <h2
+      class="font-bold text-center leading-tight tracking-tight
+             text-[clamp(1.75rem,8vw,3.5rem)]"
+    >
+      <span class="text-black uppercase block sm:inline">Nuestras</span>
+      <span class="text-secundario uppercase block sm:inline">ventajas</span>
     </h2>
 
-    <p class="text-gray-500 max-w-3xl text-sm sm:text-base text-center mt-4 mb-10 sm:mb-12">
+    <p class="text-gray-500 max-w-2xl text-sm sm:text-base text-center mt-4 mb-10 sm:mb-12">
       Descubre las ventajas de elegirnos como tu tienda de confianza. Calidad, rapidez y
       seguridad en cada compra.
     </p>
 
-    <!-- Cards -->
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 sm:gap-10 place-items-center"
-    >
-      <div
-        *ngFor="let it of items"
-        class="flex w-full max-w-xs flex-col items-center text-center gap-4"
-      >
-        <div
-          class="rounded-full bg-gray-100 flex items-center justify-center
-                 size-28 sm:size-36 md:size-44 lg:size-48 shadow-sm"
-        >
-          <img
-            [src]="it.icon"
-            [alt]="it.title"
-            loading="lazy"
-            class="h-3/5 w-3/5 object-contain"
-          />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+      <div *ngFor="let it of items" class="flex flex-col items-center text-center gap-4 max-w-xs mx-auto">
+        <div class="rounded-full bg-gray-100 flex items-center justify-center
+                    size-24 sm:size-28 md:size-32 lg:size-40 shadow-sm">
+          <img [src]="it.icon" [alt]="it.title" loading="lazy" class="h-3/5 w-3/5 object-contain" />
         </div>
-
-        <p class="text-lg sm:text-xl font-medium">{{ it.title }}</p>
-        <p class="text-gray-500 text-sm sm:text-base">
-          {{ it.text }}
-        </p>
+        <p class="text-base sm:text-lg font-medium">{{ it.title }}</p>
+        <p class="text-gray-500 text-sm sm:text-base">{{ it.text }}</p>
       </div>
     </div>
   </div>

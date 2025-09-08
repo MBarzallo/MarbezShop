@@ -1,44 +1,52 @@
-<div class="w-full flex flex-col justify-center items-center my-10">
-  <h2 class="text-7xl font-bold">
-    <span class="text-secundario uppercase">PRODUCTOS</span>
-  </h2>
+<section class="w-full py-12 sm:py-16 lg:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+    <!-- Título -->
+    <h2 class="font-bold text-center leading-tight tracking-tight
+               text-[clamp(1.75rem,8vw,3.5rem)]">
+      <span class="text-secundario uppercase">PRODUCTOS</span>
+    </h2>
 
-  <p class="text-gray-400 max-w-5xl text-sm text-center mb-20 mt-5">
-    Explora nuestras categorías de productos cuidadosamente seleccionadas para satisfacer todas tus necesidades. 
-  </p>
+    <p class="text-gray-500 max-w-2xl text-sm sm:text-base text-center mt-4 mb-10 sm:mb-12">
+      Explora nuestras categorías de productos cuidadosamente seleccionadas para satisfacer todas tus necesidades.
+    </p>
 
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full justify-items-center mx-10"
-  >
-    <div
-      *ngFor="let cat of categories"
-      class="flex flex-col items-center justify-center gap-5 p-4 w-full"
-    >
-      <img
-        [src]="cat.image"
-        [alt]="cat.title"
-        class="h-72 object-contain rounded"
-      />
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 w-full">
+      <div *ngFor="let cat of categories" class="w-full max-w-sm mx-auto">
+        <!-- Imagen principal con proporción fija -->
+        <div class="w-full rounded-xl overflow-hidden bg-gray-50 shadow-sm">
+          <img
+            [src]="cat.image"
+            [alt]="cat.title"
+            loading="lazy"
+            class="w-full h-full object-contain aspect-[4/3]"
+          />
+        </div>
 
-      <div class="relative bg-gray-100 rounded p-10 text-center h-80">
-        <img
-          [src]="starIcon"
-          alt="estrella"
-          class="absolute -top-14 left-1/2 -translate-x-1/2 p-2 rounded-full w-[6.25rem] h-[6.25rem] z-10"
-        />
+        <!-- Card -->
+        <div class="relative bg-gray-100 rounded-xl shadow-sm p-6 sm:p-8 text-center mt-10">
+          <!-- badge estrella -->
+          <img
+            [src]="starIcon"
+            alt="estrella"
+            class="absolute -top-10 left-1/2 -translate-x-1/2
+                   w-16 h-16 sm:w-20 sm:h-20 p-2 rounded-full bg-white shadow-md"
+          />
 
-        <h2 class="text-4xl">{{ cat.title }}</h2>
-        <p class="text-gray-400 max-w-xs mx-auto mt-2">
-          {{ cat.description }}
-        </p>
+          <h3 class="text-xl sm:text-2xl font-semibold mt-2">{{ cat.title }}</h3>
 
-        <a
-          [routerLink]="['/category', cat.id]"
-          class="text-secundario underline decoration-2 decoration-secundario mt-4 inline-block"
-        >
-          Ver productos
-        </a>
+          <p class="text-gray-500 text-sm sm:text-base mt-2">
+            {{ cat.description }}
+          </p>
+
+          <a
+            [routerLink]="['/category', cat.id]"
+            class="inline-block mt-4 sm:mt-5 text-secundario underline decoration-2 decoration-secundario hover:opacity-90"
+          >
+            Ver productos
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
