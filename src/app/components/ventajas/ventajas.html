@@ -1,0 +1,23 @@
+<div class="w-full flex flex-col justify-center items-center my-[7.5rem]">
+  <h2 class="text-7xl font-bold text-center">
+    <span class="text-black uppercase">Nuestras</span>
+    <span class="text-secundario uppercase">ventajas</span>
+  </h2>
+
+  <p class="text-gray-400 max-w-5xl text-sm text-center mb-20 mt-5">
+    Descubre las ventajas de elegirnos como tu tienda de confianza. Calidad, rapidez y
+    seguridad en cada compra.
+  </p>
+
+  <div class="flex flex-wrap justify-center items-center gap-7">
+    <div *ngFor="let it of items" class="flex flex-col items-center justify-center gap-5">
+      <div class="rounded-full bg-gray-200 flex items-center justify-center size-[12.5rem]">
+        <img [src]="it.icon" [alt]="it.title" />
+      </div>
+      <p class="text-xl text-center">{{ it.title }}</p>
+      <p class="text-gray-400 max-w-xs text-center">
+        {{ it.text }}
+      </p>
+    </div>
+  </div>
+</div>

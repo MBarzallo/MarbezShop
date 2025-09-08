@@ -1,0 +1,109 @@
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <h1 class="text-3xl font-extrabold tracking-tight mb-6">Tu carrito</h1>
+
+  <div *ngIf="cart.items.length; else empty">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Lista de ítems -->
+      <div class="lg:col-span-2 space-y-4">
+        <div *ngFor="let i of cart.items; trackBy: trackById"
+             class="group flex items-center gap-4 bg-white rounded-2xl p-4 sm:p-5 shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+          <img [src]="i.image || 'assets/placeholder.png'" alt=""
+               class="size-20 sm:size-24 object-contain rounded" />
+
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-base sm:text-lg truncate">{{ i.title }}</h3>
+
+            <p class="text-xs text-gray-500 mt-1" *ngIf="i.attributes">
+              <ng-container *ngFor="let kv of (i.attributes | keyvalue); let last = last">
+                <span class="uppercase tracking-wide">{{ kv.key }}</span>:
+                <span class="font-medium">{{ kv.value }}</span><span *ngIf="!last"> · </span>
+              </ng-container>
+            </p>
+
+            <!-- Stepper cantidad + quitar -->
+            <div class="mt-3 flex items-center gap-3">
+              <div class="inline-flex items-center rounded-xl border border-gray-300 overflow-hidden">
+                <button (click)="cart.updateQty(i.variantId, i.qty - 1)"
+                        [disabled]="i.qty <= 1"
+                        class="px-3 py-2 hover:bg-gray-50 disabled:opacity-40">
+                  <!-- minus -->
+                  <svg viewBox="0 0 24 24" class="size-4"><path fill="currentColor" d="M5 12h14v2H5z"/></svg>
+                </button>
+
+                <input type="number"
+                       class="w-16 text-center py-2 border-x border-gray-300 focus:outline-none"
+                       [value]="i.qty"
+                       (change)="onQtyChange($event, i.variantId)"/>
+
+                <button (click)="cart.updateQty(i.variantId, i.qty + 1)"
+                        class="px-3 py-2 hover:bg-gray-50">
+                  <!-- plus -->
+                  <svg viewBox="0 0 24 24" class="size-4"><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></svg>
+                </button>
+              </div>
+
+              <button (click)="cart.remove(i.variantId)"
+                      class="inline-flex items-center text-red-600 hover:text-red-700 rounded-lg px-2 py-1">
+                <!-- trash -->
+                <svg viewBox="0 0 24 24" class="size-4 mr-1"><path fill="currentColor" d="M9 3h6l1 2h5v2H3V5h5l1-2Zm1 6h2v9h-2V9Zm4 0h2v9h-2V9ZM7 9h2v9H7V9Z"/></svg>
+                Quitar
+              </button>
+            </div>
+          </div>
+
+          <!-- Precios -->
+          <div class="text-right">
+            <div class="text-xs text-gray-500">Precio</div>
+            <div class="text-base sm:text-lg font-semibold">$ {{ i.price | number:'1.2-2' }}</div>
+            <div class="text-xs text-gray-400 mt-1">Subtotal</div>
+            <div class="font-semibold">$ {{ (i.price * i.qty) | number:'1.2-2' }}</div>
+          </div>
+        </div>
+
+        <a routerLink="/categories" class="inline-flex items-center text-sm text-principal hover:underline mt-2">
+          <svg viewBox="0 0 24 24" class="size-4 mr-1"><path fill="currentColor" d="M14 7l-5 5 5 5V7z"/></svg>
+          Seguir comprando
+        </a>
+      </div>
+
+      <!-- Resumen -->
+      <aside class="lg:sticky lg:top-24 bg-white rounded-2xl p-6 shadow-sm ring-1 ring-gray-100 h-fit">
+        <h2 class="text-xl font-bold">Resumen</h2>
+
+        <div class="mt-4 space-y-3 text-sm">
+          <div class="flex justify-between"><span>Artículos</span><span>{{ cart.count }}</span></div>
+          <div class="flex justify-between"><span>Subtotal</span><span>$ {{ cart.subtotal | number:'1.2-2' }}</span></div>
+          <div class="flex justify-between text-gray-500"><span>Envío</span><span>Se calcula al pagar</span></div>
+        </div>
+
+        <hr class="my-4">
+        <div class="flex justify-between text-base font-semibold">
+          <span>Total estimado</span>
+          <span>$ {{ cart.subtotal | number:'1.2-2' }}</span>
+        </div>
+
+        <a routerLink="/checkout"
+           class="block mt-5 w-full text-center bg-secundario text-white rounded-xl py-3 font-semibold hover:opacity-90 transition">
+          Realizar pedido
+        </a>
+
+        <p class="text-[11px] text-gray-500 mt-3 text-center">
+          Al continuar aceptas nuestras políticas de compra y privacidad.
+        </p>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Vacío -->
+  <ng-template #empty>
+    <div class="bg-white rounded-2xl p-10 text-center shadow-sm ring-1 ring-gray-100">
+      <img src="assets/illustrations/empty-cart.svg" alt="" class="mx-auto mb-4 w-40 opacity-80" />
+      <h2 class="text-xl font-bold">Tu carrito está vacío</h2>
+      <p class="text-gray-500 mt-1">Explora nuestros productos y agrega tus favoritos.</p>
+      <a routerLink="/categories"
+         class="inline-block mt-5 bg-secundario text-white px-5 py-2 rounded-lg font-semibold hover:opacity-90">
+        Ver productos
+      </a>
+    </div>
+  </ng-template>
+</section>

@@ -1,0 +1,103 @@
+<header class="w-full flex flex-col">
+  <!-- Top bar -->
+  <div class="bg-black text-white flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0
+           px-4 sm:px-8 md:px-16 py-2 sm:py-4 text-xs sm:text-sm">
+    <!-- Social + handle -->
+    <div class="flex items-center gap-2">
+      <a href="#" target="_blank" rel="noopener"
+        class="flex items-center justify-center size-6 sm:size-8 rounded-full bg-[#262628]">
+        <img src="assets/social-media/facebook.svg" alt="Facebook" class="w-3 sm:w-4 h-3 sm:h-4" />
+      </a>
+      <a href="#" target="_blank" rel="noopener"
+        class="flex items-center justify-center size-6 sm:size-8 rounded-full bg-[#262628]">
+        <img src="assets/social-media/instagram.svg" alt="Instagram" class="w-3 sm:w-4 h-3 sm:h-4" />
+      </a>
+      <a href="#" target="_blank" rel="noopener"
+        class="flex items-center justify-center size-6 sm:size-8 rounded-full bg-[#262628]">
+        <img src="assets/social-media/tiktok.svg" alt="TikTok" class="w-3 sm:w-4 h-3 sm:h-4" />
+      </a>
+      <a href="#" target="_blank" rel="noopener"
+        class="flex items-center justify-center size-6 sm:size-8 rounded-full bg-[#262628]">
+        <img src="assets/social-media/twitter.svg" alt="X (Twitter)" class="w-3 sm:w-4 h-3 sm:h-4" />
+      </a>
+      <span class="hidden sm:inline">@marbezshop</span>
+    </div>
+
+    <!-- Email + botón + Auth (desktop y mobile) -->
+    <div class="flex items-center gap-2">
+      <span class="truncate max-w-[120px] sm:max-w-none">contacto@marbezshop.com</span>
+      <a routerLink="/contacto"
+        class="bg-secundario hover:bg-yellow-600 text-white font-bold px-2 py-1 rounded text-xs sm:text-sm">
+        CONTACTO
+      </a>
+
+      <!-- Auth (en topbar, visible >= sm) -->
+
+    </div>
+  </div>
+
+  <!-- Main navbar -->
+  <div class="bg-white shadow px-4 sm:px-8 md:px-16">
+    <div class="flex items-center justify-between py-3">
+      <!-- Logo -->
+      <a routerLink="/" class="flex-shrink-0">
+        <img src="assets/logos/logo-horizontal.png" alt="Logo Marbez" class="h-8 sm:h-10 md:h-14" />
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="hidden md:flex gap-6 font-semibold text-black text-sm">
+        <a routerLink="/" routerLinkActive="text-blue-600" class="hover:opacity-80">INICIO</a>
+        <a routerLink="/categories" routerLinkActive="text-blue-600" class="hover:opacity-80">PRODUCTOS</a>
+        <a routerLink="/blog" routerLinkActive="text-blue-600" class="hover:opacity-80">BLOG</a>
+
+        <!-- Auth desktop -->
+        <ng-container *ngIf="user$ | async as user; else guestDesktop">
+
+          <button (click)="logout()" class="text-red-600 font-semibold hover:opacity-80">CERRAR SESIÓN</button>
+        </ng-container>
+        <ng-template #guestDesktop>
+          <a routerLink="/auth/login" class="hover:opacity-80">INICIAR SESIÓN</a>
+          <a routerLink="/auth/register"
+            class="bg-secundario text-white px-3 py-1 rounded hover:opacity-90">REGISTRARSE</a>
+        </ng-template>
+        <a routerLink="/cart" class="relative hover:opacity-80">
+          🛒
+          <ng-container *ngIf="(count$ | async) as count">
+            <span *ngIf="count" class="absolute -top-2 -right-2 bg-secundario text-white text-xs rounded-full px-1">
+              {{ count }}
+            </span>
+          </ng-container>
+        </a>
+      </nav>
+
+      <!-- Toggle móvil -->
+      <div class="md:hidden relative">
+        <input id="menu-toggle" type="checkbox" class="hidden peer" />
+        <label for="menu-toggle" class="cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </label>
+
+        <!-- Menú movil -->
+        <nav class="hidden peer-checked:flex flex-col absolute right-4 mt-2 bg-white border border-gray-200
+                 rounded shadow-lg w-48 z-50 divide-y divide-gray-100 text-sm">
+          <a routerLink="/" class="px-4 py-2 hover:bg-gray-100">INICIO</a>
+          <a routerLink="/categories" class="px-4 py-2 hover:bg-gray-100">PRODUCTOS</a>
+          <a routerLink="/blog" class="px-4 py-2 hover:bg-gray-100">BLOG</a>
+
+          <!-- Auth móvil -->
+          <ng-container *ngIf="user$ | async as user; else guestMobile">
+
+            <button (click)="logout()" class="text-left px-4 py-2 hover:bg-gray-100 text-red-600">CERRAR SESIÓN</button>
+          </ng-container>
+          <ng-template #guestMobile>
+            <a routerLink="/auth/login" class="px-4 py-2 hover:bg-gray-100">INICIAR SESIÓN</a>
+            <a routerLink="/auth/register" class="px-4 py-2 hover:bg-gray-100">REGISTRARSE</a>
+          </ng-template>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,88 @@
+<div class="w-full flex flex-col mt-4">
+
+  <!-- Logo de la categoría -->
+  
+
+  <!-- Breadcrumb -->
+  <h2 class="text-2xl font-bold ml-[7.5rem] mt-4">
+    <a routerLink="/categories">PRODUCTOS/</a>
+    <a [routerLink]="['/category', product?.categoria]" class="text-secundario">{{ product?.categoria?.toUpperCase() }}</a>
+  </h2>
+
+  <!-- Main content -->
+  <div class="flex flex-col lg:flex-row items-start justify-center gap-10 mt-10">
+
+    <!-- Imagen principal -->
+    <!-- Logo + breadcrumb iguales a antes -->
+
+<!-- Imagen principal -->
+<img
+  [src]="product?.imagen || 'assets/placeholder.png'"
+  [alt]="product?.nombre"
+  class="h-[55vh] w-auto object-contain rounded-xl"
+/>
+
+<!-- Card -->
+<div class="bg-gray-200 p-10 rounded-2xl max-w-3xl w-full">
+
+  <h1 class="text-4xl text-principal font-bold text-center mb-4">
+    {{ product?.nombre }}
+  </h1>
+  <p class="text-principal font-light text-lg leading-relaxed text-justify">
+    {{ product?.descripcion }}
+  </p>
+
+  <!-- Opciones dinámicas -->
+  <div class="mt-8 space-y-6">
+    <div *ngFor="let opt of options" class="flex items-center">
+      <span class="font-semibold text-lg text-principal mr-4">{{ opt.name }}:</span>
+
+      <div class="flex items-center gap-3" *ngIf="opt.name | lowercase as ln">
+        <!-- Si parece color, usa circulitos; si no, pills con texto -->
+        <ng-container *ngFor="let val of opt.values">
+          <!-- swatch circular (intenta pintar color; si no, igual muestra borde) -->
+          <button
+            *ngIf="ln === 'color'; else textValue"
+            [title]="val"
+            class="w-6 h-6 rounded-full border-2 transition"
+            [ngStyle]="colorSwatchStyle(val)"
+            [ngClass]="{
+              'border-secundario ring-2 ring-secundario/40': selected[keyize(opt.name)] === val,
+              'opacity-40 pointer-events-none': isDisabled(opt.name, val)
+            }"
+            (click)="!isDisabled(opt.name, val) && select(opt.name, val)"
+          ></button>
+
+          <!-- texto -->
+          <ng-template #textValue>
+            <button
+              class="px-3 h-8 rounded-full border-2 transition"
+              [ngClass]="{
+                'border-secundario bg-white': selected[keyize(opt.name)] === val,
+                'border-gray-400 hover:border-secundario': selected[keyize(opt.name)] !== val,
+                'opacity-40 pointer-events-none': isDisabled(opt.name, val)
+              }"
+              (click)="!isDisabled(opt.name, val) && select(opt.name, val)"
+            >
+              {{ val }}
+            </button>
+          </ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- Precio (variante si ya hay una única, sino base) -->
+  <p class="text-2xl font-bold text-secundario text-center my-8">
+    USD$ {{ (displayPrice || product?.precio_base) | currency:'':'symbol':'1.2-2' }}
+  </p>
+
+  <div class="flex gap-6 justify-center">
+    <button
+      class="bg-secundario hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg transition"
+      (click)="addToCart()"
+    >
+      AÑADIR AL CARRITO
+    </button>
+  </div>
+</div>

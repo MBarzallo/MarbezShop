@@ -1,0 +1,136 @@
+<form class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+      [formGroup]="form"
+      (ngSubmit)="pay()">
+
+  <h1 class="text-3xl font-extrabold tracking-tight mb-2">Confirmar compra</h1>
+  <p class="text-sm text-gray-500 mb-6">Revisa tus datos y finaliza tu pedido.</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Columna izquierda -->
+    <div class="md:col-span-2 space-y-6">
+      <!-- Datos de contacto -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm ring-1 ring-gray-100">
+        <h2 class="text-lg font-bold mb-4">Datos de contacto</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Nombre</label>
+            <input type="text"
+                   formControlName="nombre"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="Tu nombre" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Teléfono</label>
+            <input type="text"
+                   formControlName="telefono"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="+593 999 999 999" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email"
+                   formControlName="email"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="tucorreo@ejemplo.com" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Dirección de envío -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm ring-1 ring-gray-100">
+        <h2 class="text-lg font-bold mb-4">Dirección de envío</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700">Dirección</label>
+            <input type="text"
+                   formControlName="direccion1"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="Calle Principal 123, Edificio XYZ" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700">Dirección 2 (opcional)</label>
+            <input type="text"
+                   formControlName="direccion2"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="Depto, Piso, Referencia adicional" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Ciudad</label>
+            <input type="text"
+                   formControlName="ciudad"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="Guayaquil" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Provincia</label>
+            <input type="text"
+                   formControlName="provincia"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="Guayas" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Código postal</label>
+            <input type="text"
+                   formControlName="codigo_postal"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="090101" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Referencia</label>
+            <input type="text"
+                   formControlName="referencia"
+                   class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                   placeholder="Frente al parque / Casa esquinera" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Notas -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm ring-1 ring-gray-100">
+        <h2 class="text-lg font-bold mb-4">Notas para el pedido</h2>
+        <textarea rows="4"
+                  formControlName="notas"
+                  class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-secundario/30 focus:border-secundario"
+                  placeholder="Instrucciones de entrega, horario preferido, etc."></textarea>
+      </div>
+    </div>
+
+    <!-- Resumen (derecha) -->
+    <aside class="md:sticky md:top-24 h-fit bg-white rounded-2xl p-6 shadow-sm ring-1 ring-gray-100">
+      <h2 class="text-xl font-bold">Resumen</h2>
+
+      <!-- Mini lista de items -->
+      <div class="mt-4 space-y-3 max-h-64 overflow-auto pr-1" *ngIf="cart.items.length">
+        <div *ngFor="let i of cart.items" class="flex items-center gap-3">
+          <img [src]="i.image || 'assets/placeholder.png'" class="size-12 object-contain rounded" alt="" />
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium truncate">{{ i.title }}</p>
+            <p class="text-xs text-gray-500">x{{ i.qty }} · $ {{ i.price | number:'1.2-2' }}</p>
+          </div>
+          <div class="text-sm font-semibold">$ {{ (i.price * i.qty) | number:'1.2-2' }}</div>
+        </div>
+      </div>
+
+      <div class="mt-4 space-y-2 text-sm">
+        <div class="flex justify-between"><span>Artículos</span><span>{{ cart.count }}</span></div>
+        <div class="flex justify-between"><span>Subtotal</span><span>$ {{ cart.subtotal | number:'1.2-2' }}</span></div>
+        <div class="flex justify-between text-gray-500"><span>Envío</span><span>Se calcula al pagar</span></div>
+      </div>
+
+      <hr class="my-4">
+      <div class="flex justify-between text-base font-semibold">
+        <span>Total</span>
+        <span>$ {{ cart.subtotal | number:'1.2-2' }}</span>
+      </div>
+
+      <!-- Botón submit del formulario -->
+      <button type="submit"
+              [disabled]="loading || !cart.items.length || form.invalid"
+              class="mt-5 w-full bg-secundario text-white rounded-xl py-3 font-semibold hover:opacity-90 disabled:opacity-60 transition">
+        {{ loading ? 'Procesando…' : 'Finalizar compra' }}
+      </button>
+
+      <p class="text-xs text-gray-500 mt-3 text-center" *ngIf="msg">{{ msg }}</p>
+    </aside>
+  </div>
+</form>

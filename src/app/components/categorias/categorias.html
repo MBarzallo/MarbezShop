@@ -1,0 +1,44 @@
+<div class="w-full flex flex-col justify-center items-center my-10">
+  <h2 class="text-7xl font-bold">
+    <span class="text-secundario uppercase">PRODUCTOS</span>
+  </h2>
+
+  <p class="text-gray-400 max-w-5xl text-sm text-center mb-20 mt-5">
+    Explora nuestras categorías de productos cuidadosamente seleccionadas para satisfacer todas tus necesidades. 
+  </p>
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full justify-items-center mx-10"
+  >
+    <div
+      *ngFor="let cat of categories"
+      class="flex flex-col items-center justify-center gap-5 p-4 w-full"
+    >
+      <img
+        [src]="cat.image"
+        [alt]="cat.title"
+        class="h-72 object-contain rounded"
+      />
+
+      <div class="relative bg-gray-100 rounded p-10 text-center h-80">
+        <img
+          [src]="starIcon"
+          alt="estrella"
+          class="absolute -top-14 left-1/2 -translate-x-1/2 p-2 rounded-full w-[6.25rem] h-[6.25rem] z-10"
+        />
+
+        <h2 class="text-4xl">{{ cat.title }}</h2>
+        <p class="text-gray-400 max-w-xs mx-auto mt-2">
+          {{ cat.description }}
+        </p>
+
+        <a
+          [routerLink]="['/category', cat.id]"
+          class="text-secundario underline decoration-2 decoration-secundario mt-4 inline-block"
+        >
+          Ver productos
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

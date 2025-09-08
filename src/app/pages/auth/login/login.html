@@ -1,0 +1,66 @@
+<section class="min-h-screen grid grid-cols-1 md:grid-cols-2">
+  <!-- Columna izquierda: imagen -->
+<!-- Columna izquierda: imagen (más pequeña) -->
+<div class="relative hidden md:flex items-center justify-center p-6 lg:p-10">
+  <img
+    src="assets/images/camion.png"
+    alt="MarbezShop"
+    class="w-full h-auto object-contain
+           max-w-[520px] md:max-w-[420px] lg:max-w-[520px] xl:max-w-[600px]
+           max-h-[55vh] rounded-lg shadow"
+  />
+  <!-- Degradado suave (opcional) -->
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent"></div>
+</div>
+
+
+  <!-- Columna derecha: formulario -->
+  <div class="flex items-center justify-center p-6 md:p-12">
+    <div class="w-full max-w-md bg-white/80 backdrop-blur rounded-2xl shadow-xl border border-gray-100">
+      <div class="p-6 md:p-8">
+        <h1 class="text-3xl font-extrabold tracking-tight">Iniciar sesión</h1>
+        <p class="mt-1 text-sm text-gray-500">
+          Usa tu email y contraseña
+        </p>
+
+        <form class="mt-6 space-y-4" (ngSubmit)="signIn()" [formGroup]="form">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              formControlName="email"
+              class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-secundario/40 focus:border-secundario"
+              placeholder="tucorreo@ejemplo.com"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-secundario/40 focus:border-secundario"
+              placeholder="•••••••• "
+            />
+          </div>
+
+          <button
+            [disabled]="loading"
+            class="w-full bg-secundario text-white font-semibold rounded-xl px-4 py-3 shadow-sm hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition"
+          >
+            {{ loading ? 'Cargando…' : 'Entrar' }}
+          </button>
+        </form>
+
+        
+
+        <p class="text-xs text-gray-500 mt-4" *ngIf="msg">{{ msg }}</p>
+
+        <div class="mt-4 text-sm text-gray-600 flex items-center justify-between">
+          <a routerLink="/auth/register" class="underline hover:opacity-80">Crear cuenta</a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

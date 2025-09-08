@@ -1,0 +1,66 @@
+<section class="min-h-screen grid grid-cols-1 md:grid-cols-2">
+    <!-- Columna izquierda: formulario -->
+    <div class="flex items-center justify-center p-6 md:p-12">
+        <div class="w-full max-w-md bg-white/80 backdrop-blur rounded-2xl shadow-xl border border-gray-100">
+            <div class="p-6 md:p-8">
+                <h1 class="text-3xl font-extrabold tracking-tight">Crear cuenta</h1>
+                <p class="mt-1 text-sm text-gray-500">Es rápido y gratis ✨</p>
+
+                <form class="mt-6 space-y-4" (ngSubmit)="signUp()" [formGroup]="form">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" formControlName="email"
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-secundario/40 focus:border-secundario"
+                            placeholder="tucorreo@ejemplo.com" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+                        <input type="password" formControlName="password"
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-secundario/40 focus:border-secundario"
+                            placeholder="••••••••" />
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Nombre (opcional)</label>
+                            <input type="text" formControlName="nombre"
+                                class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-secundario/40 focus:border-secundario"
+                                placeholder="Tu nombre" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Teléfono (opcional)</label>
+                            <input type="text" formControlName="telefono"
+                                class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-secundario/40 focus:border-secundario"
+                                placeholder="+593 999 999 999" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Direccion de entrega</label>
+                        <input type="text" formControlName="direccion"
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-secundario/40 focus:border-secundario"
+                            placeholder="Tu dirección de entrega" />
+                    </div>
+
+                    <button [disabled]="loading"
+                        class="w-full bg-secundario text-white font-semibold rounded-xl px-4 py-3 shadow-sm hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition">
+                        {{ loading ? 'Cargando…' : 'Crear cuenta' }}
+                    </button>
+                </form>
+
+                <p class="text-xs text-gray-500 mt-4" *ngIf="msg">{{ msg }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Columna derecha: imagen a media pantalla -->
+    <div class="relative hidden md:block">
+        <!-- Cambia la ruta por tu imagen -->
+        <img src="assets/images/chica.png" alt="MarbezShop" class="absolute inset-0 h-[80%] w- object-cover" />
+        <!-- Suave degradado para contraste del texto -->
+        <div class="absolute inset-0 bg-gradient-to-l from-black/40 via-black/20 to-transparent"></div>
+
+
+    </div>
+</section>

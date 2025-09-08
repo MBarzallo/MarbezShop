@@ -1,0 +1,49 @@
+<!-- Breadcrumb / volver -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-4">
+  <a routerLink="/categories" class="text-sm text-gray-500 hover:text-gray-700 underline">
+    ← Volver a categorías
+  </a>
+</div>
+
+<!-- Header de la categoría -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 py-8 flex flex-col lg:flex-row items-center gap-8">
+  <div class="w-full lg:w-1/2">
+    <img [src]="category?.image" [alt]="category?.title" class="w-full max-h-[380px] object-contain" />
+  </div>
+  <div class="w-full lg:w-1/2">
+    <h1 class="text-4xl md:text-5xl font-bold">
+      {{ category?.title }}
+    </h1>
+    <p class="mt-3 text-gray-600 max-w-prose">
+      {{ category?.description }}
+    </p>
+  </div>
+</section>
+
+<hr class="border-0 h-[5px] bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-10 w-full" />
+
+<!-- Grid de productos -->
+<section class="max-w-7xl mx-auto px-4 md:px-6 pb-16">
+  <div *ngIf="products.length; else noProds"
+       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div *ngFor="let p of products" class="bg-white  rounded-xl shadow-sm overflow-hidden">
+      <div class="aspect-square bg-gray-50 flex items-center justify-center">
+        <img [src]="p.imagen||'assets/images/sin-imagen.png'" [alt]="p.imagen" class="max-h-full max-w-full object-contain p-4" />
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-lg line-clamp-2">{{ p.nombre }}</h3>
+        <p class="mt-1 text-secundario font-bold">{{ p.precio_base | currency:'USD':'symbol':'1.0-2' }}</p>
+        <div class="mt-3 flex gap-2">
+          
+          <a [routerLink]="['/product', p.id]" class="px-10 py-2 bg-secundario text-white rounded hover:opacity-90">
+            Ver
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noProds>
+    <p class="text-center text-gray-500">No hay productos para esta categoría por ahora.</p>
+  </ng-template>
+</section>
