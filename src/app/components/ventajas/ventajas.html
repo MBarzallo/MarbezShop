@@ -1,23 +1,40 @@
-<div class="w-full flex flex-col justify-center items-center my-[7.5rem]">
-  <h2 class="text-7xl font-bold text-center">
-    <span class="text-black uppercase">Nuestras</span>
-    <span class="text-secundario uppercase">ventajas</span>
-  </h2>
+<section class="w-full py-16 sm:py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+    <h2 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-center">
+      <span class="text-black uppercase">Nuestras</span>
+      <span class="text-secundario uppercase">ventajas</span>
+    </h2>
 
-  <p class="text-gray-400 max-w-5xl text-sm text-center mb-20 mt-5">
-    Descubre las ventajas de elegirnos como tu tienda de confianza. Calidad, rapidez y
-    seguridad en cada compra.
-  </p>
+    <p class="text-gray-500 max-w-3xl text-sm sm:text-base text-center mt-4 mb-10 sm:mb-12">
+      Descubre las ventajas de elegirnos como tu tienda de confianza. Calidad, rapidez y
+      seguridad en cada compra.
+    </p>
 
-  <div class="flex flex-wrap justify-center items-center gap-7">
-    <div *ngFor="let it of items" class="flex flex-col items-center justify-center gap-5">
-      <div class="rounded-full bg-gray-200 flex items-center justify-center size-[12.5rem]">
-        <img [src]="it.icon" [alt]="it.title" />
+    <!-- Cards -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 sm:gap-10 place-items-center"
+    >
+      <div
+        *ngFor="let it of items"
+        class="flex w-full max-w-xs flex-col items-center text-center gap-4"
+      >
+        <div
+          class="rounded-full bg-gray-100 flex items-center justify-center
+                 size-28 sm:size-36 md:size-44 lg:size-48 shadow-sm"
+        >
+          <img
+            [src]="it.icon"
+            [alt]="it.title"
+            loading="lazy"
+            class="h-3/5 w-3/5 object-contain"
+          />
+        </div>
+
+        <p class="text-lg sm:text-xl font-medium">{{ it.title }}</p>
+        <p class="text-gray-500 text-sm sm:text-base">
+          {{ it.text }}
+        </p>
       </div>
-      <p class="text-xl text-center">{{ it.title }}</p>
-      <p class="text-gray-400 max-w-xs text-center">
-        {{ it.text }}
-      </p>
     </div>
   </div>
-</div>
+</section>

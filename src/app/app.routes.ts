@@ -11,7 +11,7 @@ import { authGuard } from './shared/guards/auth-guard';
 import { Checkout } from './pages/checkout/checkout';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'category/mascotas', pathMatch: 'full' },
+    { path: '', component: Home },
     { path: 'blog', component: Blog },
     { path: 'categories', component: Categories },
     { path: 'category/:id', component: CategoryPage },
