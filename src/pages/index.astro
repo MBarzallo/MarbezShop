@@ -5,13 +5,25 @@ import Ventajas from "../components/sections/Ventajas.astro";
 import Categories from "../components/sections/Categories.astro";
 import "swiper/css";
 import "swiper/css/pagination";
+const start = new Date("2025-09-08T00:00:00"); // inicio del acceso
+const now = new Date();
+const isActive = now >= start;
 ---
 
-<Layout>
-  <SwiperHero client:load />
-  <Ventajas />
-  <hr
-    class="border-0 h-[5px] bg-gradient-to-r from-transparent via-gray-300 to-transparen mb-20 w-full"
-  />
-  <Categories />
-</Layout>
+{!isActive && (
+  <script>
+    window.location.href = "/landing";
+  </script>
+)}
+
+{isActive && (
+  <>
+    <!-- Aquí va tu contenido normal -->
+    <Layout>
+      <SwiperHero client:load />
+      <Ventajas />
+      <hr class="border-0 h-[5px] bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-20 w-full" />
+      <Categories />
+    </Layout>
+  </>
+)}

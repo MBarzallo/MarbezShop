@@ -1,0 +1,188 @@
+---
+import LogoBlanco from "../../assets/logos/logo-blanco.png";
+import "../../styles/global.css";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>MarbezShop | Próximamente</title>
+  </head>
+  <body
+    class="w-full h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white"
+  >
+    <!-- Contenedor principal -->
+    <div class="text-center max-w-lg w-full p-6">
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+        <img src={LogoBlanco.src} alt="MarbezShop" class="h-20" />
+      </div>
+
+      <!-- Texto principal -->
+      <h1 class="text-4xl font-bold mb-4">Próximamente 🚀</h1>
+      <p class="text-lg mb-8">
+        Regístrate y sé parte de nuestra lista de espera exclusiva.
+      </p>
+
+      <!-- Cuenta regresiva -->
+      <div
+        id="countdown"
+        class="flex justify-center gap-4 text-2xl font-mono mb-8"
+      >
+        <div><span id="days">00</span><p class="text-sm">Días</p></div>
+        <div><span id="hours">00</span><p class="text-sm">Horas</p></div>
+        <div><span id="minutes">00</span><p class="text-sm">Min</p></div>
+        <div><span id="seconds">00</span><p class="text-sm">Seg</p></div>
+      </div>
+
+      <!-- Formulario -->
+      <form
+        id="earlyAccessForm"
+        class="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-lg space-y-4"
+      >
+        <div>
+          <input
+            id="ea-email"
+            type="email"
+            required
+            placeholder="Correo"
+            class="w-full px-4 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+        </div>
+        <div>
+          <input
+            id="ea-nombres"
+            type="text"
+            required
+            placeholder="Nombres"
+            class="w-full px-4 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+        </div>
+        <div>
+          <input
+            id="ea-apellidos"
+            type="text"
+            required
+            placeholder="Apellidos"
+            class="w-full px-4 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+        </div>
+        <button
+          id="submitBtn"
+          type="submit"
+          class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 rounded-lg transition flex items-center justify-center gap-2"
+        >
+          <span id="btnText">Registrarme</span>
+          <svg
+            id="btnSpinner"
+            class="hidden animate-spin h-5 w-5 text-black"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <script type="module">
+      // Cuenta regresiva
+      const endDate = new Date("2025-09-08T00:00:00").getTime();
+      const daysEl = document.getElementById("days");
+      const hoursEl = document.getElementById("hours");
+      const minutesEl = document.getElementById("minutes");
+      const secondsEl = document.getElementById("seconds");
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = endDate - now;
+
+        if (distance < 0) {
+          document.getElementById("countdown").innerHTML =
+            "<p class='text-green-400 text-xl'>¡Ya estamos en línea! 🎉</p>";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        daysEl.textContent = days.toString().padStart(2, "0");
+        hoursEl.textContent = hours.toString().padStart(2, "0");
+        minutesEl.textContent = minutes.toString().padStart(2, "0");
+        secondsEl.textContent = seconds.toString().padStart(2, "0");
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // Envío de formulario
+      const form = document.getElementById("earlyAccessForm");
+      const btn = document.getElementById("submitBtn");
+      const btnText = document.getElementById("btnText");
+      const btnSpinner = document.getElementById("btnSpinner");
+
+      // Revisar si ya está registrado
+      if (localStorage.getItem("ea_submitted") === "yes") {
+        form.innerHTML =
+          "<p class='text-green-400 font-bold text-xl'>Ya te has registrado ✅</p>";
+      } else {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // Estado "enviando"
+          btn.disabled = true;
+          btnText.textContent = "Enviando...";
+          btnSpinner.classList.remove("hidden");
+
+          const data = {
+            correo: document.getElementById("ea-email").value.trim(),
+            nombres: document.getElementById("ea-nombres").value.trim(),
+            apellidos: document.getElementById("ea-apellidos").value.trim(),
+            date: new Date().toISOString(),
+          };
+
+          try {
+            await fetch(
+              "https://script.google.com/macros/s/AKfycbzBP8jBV7V2v2elzV_4O3uggl5z-sxoUsXUCHJVJ06xGa_yi-WlcNx9X9aVGnDv69Oadw/exec",
+              {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+              }
+            );
+
+            // Guardar estado en localStorage
+            localStorage.setItem("ea_submitted", "yes");
+
+            // Reemplazar formulario por mensaje
+            form.innerHTML =
+              "<p class='text-green-400 font-bold text-xl'>¡Gracias por registrarte! 🎉</p>";
+          } catch (err) {
+            alert("Error al enviar. Inténtalo de nuevo.");
+            btn.disabled = false;
+            btnText.textContent = "Registrarme";
+            btnSpinner.classList.add("hidden");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

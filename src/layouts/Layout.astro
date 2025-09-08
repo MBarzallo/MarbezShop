@@ -1,8 +1,9 @@
 ---
-import "../styles/global.css";
+
 import Header from "../components/sections/Header.astro";
 import LogoBlanco from "../assets/logos/logo-blanco.png";
 import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
 ---
 
 <!doctype html>
@@ -144,7 +145,7 @@ import { ClientRouter } from "astro:transitions";
 
     // Fechas límite
     const start = new Date("2025-07-02T00:00:00");
-    const end = new Date("2025-07-20T23:59:59");
+    const end = new Date("2025-09-09T00:00:00");
     const now = new Date();
 
     // Mostrar popup solo si estamos en rango y no se envió aún
