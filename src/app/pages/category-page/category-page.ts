@@ -24,6 +24,8 @@ const CATEGORIES: Category[] = [
 export class CategoryPage {
 
   category?: Category;
+  loading: boolean = false;
+  skeletons = Array.from({ length: 8 });
   products: Product[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private productsService: ProductsService) {}
@@ -42,12 +44,18 @@ export class CategoryPage {
 
   getProducts() {
     if (!this.category) return;
+    this.loading = true;
     this.productsService.getProductosByCategory(this.category.id)
       .then(products => {
+        this.loading = false;
         this.products = products;
       })
       .catch(error => {
+        this.loading = false;
         console.error('Error fetching products:', error);
       });
+  }
+  trackById(_: number, p: Product) {
+    return p?.id ?? _;
   }
 }
