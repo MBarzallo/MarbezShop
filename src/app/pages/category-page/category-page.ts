@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProductsService } from '../../shared/services/products/products-service';
 import { Product } from '../../models/product';
+import { FormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 type Category = { id: string; title: string; description: string; image: string };
 
@@ -17,7 +19,7 @@ const CATEGORIES: Category[] = [
 
 @Component({
   selector: 'app-category-page',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './category-page.html',
   styleUrl: './category-page.css'
 })
@@ -27,6 +29,9 @@ export class CategoryPage {
   loading: boolean = false;
   skeletons = Array.from({ length: 8 });
   products: Product[] = [];
+  search = '';
+  
+  private search$ = new Subject<string>();
 
   constructor(private route: ActivatedRoute, private router: Router, private productsService: ProductsService) {}
 
@@ -39,13 +44,22 @@ export class CategoryPage {
       return;
     }
     this.getProducts();
-    
+    this.search$
+          .pipe(debounceTime(400), distinctUntilChanged())
+          .subscribe((q) => {
+            this.products = [];
+            this.skeletons = Array.from({ length: 8 });
+            this.getProducts();
+          });
+  }
+  onSearch(q: string) {
+    this.search$.next(q ?? '');
   }
 
   getProducts() {
     if (!this.category) return;
     this.loading = true;
-    this.productsService.getProductosByCategory(this.category.id)
+    this.productsService.getProductosByCategory(this.category.id, this.search)
       .then(products => {
         this.loading = false;
         this.products = products;

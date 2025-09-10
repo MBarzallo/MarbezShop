@@ -8,12 +8,32 @@ import { Option, Product, ProductoDetallado } from '../../../models/product';
 export class ProductsService {
   constructor(private sb: Supabase) {}
 
-  async getProductosByCategory(categoryId: string): Promise<Product[]> {
+  async getProductosByCategory(categoryId: string, search: string): Promise<Product[]> {
+    search = search?.trim() ?? '';
+    search = search.toLowerCase();
+    search = search.replace("á","a").replace("é","e").replace("í","i").replace("ó","o").replace("ú","u");
+
     const { data, error } = await this.sb.supabase
       .from('productos')
       .select('*')
       .eq('categoria', categoryId)
+      .ilike('nombre', `%${search}%`)
       .order('imagen');
+    if (error) throw error;
+    return data;
+  }
+
+  async getProducts(filter: { offset?: number; limit?: number , search?: string }): Promise<Product[]> {
+    filter.search = filter.search?.trim() ?? '';
+    filter.search = filter.search.toLowerCase();
+    filter.search = filter.search.replace("á","a").replace("é","e").replace("í","i").replace("ó","o").replace("ú","u");    
+
+    const { data, error } = await this.sb.supabase
+      .from('productos')
+      .select('*')
+      .ilike('nombre', `%${filter.search}%`)
+      .order('imagen')
+      .range(filter.offset ?? 0, (filter.offset ?? 0) + (filter.limit ?? 8) - 1);
     if (error) throw error;
     return data;
   }
@@ -49,7 +69,8 @@ export class ProductsService {
     return data!;
   }
 
-  /** De las variantes arma las opciones tipo [{ name:'Talla', values:['S','M','L'] }, ...] */
+
+
   buildOptions(prod: ProductoDetallado): Option[] {
     const map = new Map<string, Set<string>>();
 

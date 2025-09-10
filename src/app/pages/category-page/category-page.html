@@ -22,6 +22,23 @@
 
 <hr class="border-0 h-[5px] bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-10 w-full" />
 
+<div class="max-w-7xl mx-auto px-4 md:px-6 mb-6">
+  <div class="relative w-full sm:w-96">
+    <input
+      type="text"
+      placeholder="Buscar productos…"
+      class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-2.5 pr-20 shadow-sm focus:outline-none focus:ring-2 focus:ring-secundario"
+      [(ngModel)]="search"
+      (ngModelChange)="onSearch($event)"
+    />
+    <!-- icono -->
+    <span *ngIf="!search" class="pointer-events-none absolute inset-y-0 right-10 flex items-center text-gray-400">🔎</span>
+    <!-- limpiar -->
+    <button *ngIf="search" type="button"
+            class="absolute inset-y-0 right-2 my-1 px-3 rounded-xl text-sm hover:bg-gray-100"
+            (click)="search=''; onSearch('')">Limpiar</button>
+  </div>
+</div>
 <!-- Grid de productos -->
 <section class="max-w-7xl mx-auto px-4 md:px-6 pb-16">
   <!-- GRID de productos -->
@@ -36,7 +53,7 @@
         <div class="p-4">
           <h3 class="font-semibold text-lg line-clamp-2">{{ p.nombre }}</h3>
           <p class="mt-1 text-secundario font-bold">
-            {{ p.precio_base | currency:'USD':'symbol':'1.0-2' }}
+            {{ p.precio_base *1.15| currency:'USD':'symbol':'1.0-2' }}
           </p>
           <div class="mt-3 flex gap-2">
             <a [routerLink]="['/product', p.id]"

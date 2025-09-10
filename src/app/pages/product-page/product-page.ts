@@ -23,6 +23,7 @@ import { CartService } from '../../shared/services/cart/car-service';
 export class ProductPage implements OnInit {
   WA_NUMBER = '593999762586';
   showMore: boolean |null = null;
+  loading: boolean = false;
 
   product: ProductoDetallado | null = null;
   options: Option[] = []; // [{name:'Talla', values:[...]}, ...]
@@ -41,8 +42,9 @@ export class ProductPage implements OnInit {
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
+    this.loading = true;
     await this.loadProduct(id);
-
+    this.loading = false;
     // leer query params e inicializar selección (si vienen)
     const qp = this.route.snapshot.queryParamMap;
     for (const opt of this.options) {
@@ -50,6 +52,7 @@ export class ProductPage implements OnInit {
       const v = qp.get(k) ?? undefined;
       if (v && opt.values.includes(v)) this.selected[k] = v;
     }
+
   }
 
   private async loadProduct(id: string) {
@@ -160,9 +163,9 @@ export class ProductPage implements OnInit {
     const v = this.resolvedVariant;
     console.log("Resolviendo precio para variante:");
     console.log(v);
-    if (v?.precio) return v.precio;
+    if (v?.precio) return v.precio *1.15;
     console.log(this.product?.precio_base);
-    return this.product?.precio_base;
+    return (this.product?.precio_base??0) * 1.15;
   }
 
   
@@ -182,7 +185,7 @@ addToCart(qty = 1) {
     variantId: variant.id,
     title: this.product!.nombre,
     image: this.product!.imagen,
-    price: (variant.precio ?? this.product!.precio_base)!,
+    price: (variant.precio ?? this.product!.precio_base)! *1.15,
     qty,
     attributes: this.selected as any // { talla:'M', color:'Negro', ... }
   });
