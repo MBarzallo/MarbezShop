@@ -29,8 +29,11 @@
     {{ product?.nombre }}
   </h1>
   <p class="text-principal font-light text-lg leading-relaxed text-justify">
-    {{ product?.descripcion }}
+    {{ product?.descripcion?.substring(0, showMore ? undefined : 200) }}<span *ngIf="showMore === false">...</span>
   </p>
+  <button *ngIf="showMore !== null" (click)="viewMore()" class="bg-secundario text-white px-2 py-1 rounded-md font-semibold mt-2">
+    {{ showMore ? 'Ver menos' : 'Ver más' }}
+  </button>
 
   <!-- Opciones dinámicas -->
   <div class="mt-8 space-y-6">

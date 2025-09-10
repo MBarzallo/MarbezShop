@@ -22,6 +22,7 @@ import { CartService } from '../../shared/services/cart/car-service';
 })
 export class ProductPage implements OnInit {
   WA_NUMBER = '593999762586';
+  showMore: boolean |null = null;
 
   product: ProductoDetallado | null = null;
   options: Option[] = []; // [{name:'Talla', values:[...]}, ...]
@@ -55,11 +56,17 @@ export class ProductPage implements OnInit {
     const prod = await this.products.getProductoDetallado(id);
     this.product = prod;
 
-    // construir opciones desde variantes → atributos dinámicos
+    if(this.product.descripcion.length>200){
+      this.showMore = false;
+    }
     this.options = this.products.buildOptions(prod);
 
     // construir índice inverso attrKey/value → variantes
     this.buildVariantIndex();
+  }
+
+  viewMore() {
+    this.showMore = !this.showMore;
   }
 
   private buildVariantIndex() {
