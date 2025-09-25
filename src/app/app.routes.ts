@@ -16,7 +16,7 @@ const eventDeadline = new Date('2025-10-05T20:30:00');
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: new Date() < eventDeadline ? 'landing' : 'home',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   { path: 'landing', component: Landing },
