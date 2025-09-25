@@ -16,6 +16,6 @@ export class App {
 
   // true si estamos antes de la fecha → mostrar landing
   get isLandingActive(): boolean {
-    return new Date() < this.deadline;
+    return false;
   }
 }
