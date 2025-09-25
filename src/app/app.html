@@ -1,3 +1,6 @@
-<app-main-layout>
+<!-- app.component.html -->
+<app-main-layout *ngIf="!isLandingActive">
   <router-outlet></router-outlet>
 </app-main-layout>
+
+<router-outlet *ngIf="isLandingActive"></router-outlet>

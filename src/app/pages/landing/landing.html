@@ -1,0 +1,164 @@
+<!-- Hero Section -->
+<section class="bg-blue-900 text-white flex flex-col items-center justify-center py-16 px-4 text-center">
+  <h1 class="text-3xl sm:text-5xl font-bold mb-4">
+    🌀 La cuenta regresiva se reinicia…
+  </h1>
+  <h2 class="text-xl sm:text-2xl font-semibold mb-6">
+    🎉 Prepárate para el GRAN PETFEST MARBEZ — 05/10/2025
+  </h2>
+  <p class="text-gray-200 max-w-2xl mb-8">
+    14 días de mimos, juegos y premios para ti y tu mascota antes del gran día 🐾✨
+  </p>
+
+  <!-- Countdown -->
+  <div class="flex gap-6 justify-center mb-10">
+    <div><p class="text-4xl font-bold">{{ days }}</p><span>Días</span></div>
+    <div><p class="text-4xl font-bold">{{ hours }}</p><span>Horas</span></div>
+    <div><p class="text-4xl font-bold">{{ minutes }}</p><span>Min</span></div>
+    <div><p class="text-4xl font-bold">{{ seconds }}</p><span>Seg</span></div>
+  </div>
+
+  <button class="bg-yellow-400 text-blue-900 font-semibold px-6 py-3 rounded-xl shadow-lg" (click)="openModal()">
+    🔶 Apúntate y entra al sorteo final
+  </button>
+
+  <!-- Apartado para la imagen -->
+  <div class="mt-12 max-w-lg">
+    <img src="assets/landing/marbez-pets.png" alt="Perro y gato felices con cajas MARBEZ" class="w-full object-contain" />
+  </div>
+</section>
+
+<!-- Sección 2 — Beneficios -->
+<section class="py-16 px-6 text-center">
+  <h2 class="text-2xl sm:text-3xl font-bold mb-8">
+    🐶🐱 ¿Qué ganas al entrar en la lista de espera MARBEZ?
+  </h2>
+  <ul class="space-y-4 max-w-xl mx-auto text-left">
+    <li>✅ Acceso anticipado al lanzamiento oficial (PetFest 05/10).</li>
+    <li>✅ Participas automáticamente en el GRAN SORTEO MARBEZ.</li>
+    <li>✅ Premios diarios con #MimosMARBEZ.</li>
+    <li>✅ Cupón exclusivo de bienvenida solo para la lista.</li>
+    <li>✅ Beneficios exclusivos de por vida.</li>
+  </ul>
+</section>
+
+<!-- Sección 3 — Sorteo -->
+<section class="bg-gray-100 py-16 px-6 text-center">
+  <h2 class="text-2xl sm:text-3xl font-bold mb-6">
+    🎁 Gran Sorteo MARBEZ: El Mimo Supremo
+  </h2>
+  <p class="max-w-2xl mx-auto text-gray-700">
+    Cada acción suma entradas (seguirnos, usar #MimosMARBEZ, participar en retos).
+    El 05/10 en vivo conoceremos al ganador de una tarjeta de regalo + muchos premios más.
+  </p>
+</section>
+
+<!-- Sección 4 — Comunidad -->
+<section class="py-16 px-6 text-center">
+  <h2 class="text-2xl sm:text-3xl font-bold mb-8">
+    💛 Ya somos una comunidad que comparte mimos y juegos cada día.
+  </h2>
+  <p class="max-w-2xl mx-auto mb-8 text-gray-700">
+    Súmate y haz que tu mascota también brille en el PetFest.
+  </p>
+
+</section>
+
+<!-- Sección 5 — CTA final -->
+<section class="bg-blue-900 text-white py-16 px-6 text-center">
+  <h2 class="text-2xl sm:text-3xl font-bold mb-6">
+    🚀 El 05/10 empezamos una nueva forma de comprar para ti y tu mascota. No te lo pierdas.
+  </h2>
+  <button class="bg-yellow-400 text-blue-900 font-semibold px-6 py-3 rounded-xl shadow-lg" (click)="openModal()">
+    🔶 Quiero estar en la lista
+  </button>
+</section>
+
+
+
+
+<!-- Modal -->
+<div
+  *ngIf="isModalOpen"
+  class="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+>
+  <div class="bg-gray-900 text-white p-6 rounded-xl max-w-md w-full relative">
+    <!-- Botón cerrar -->
+    <button
+      (click)="closeModal()"
+      class="absolute top-3 right-3 text-gray-400 hover:text-white text-xl"
+    >
+      ✕
+    </button>
+
+    <h2 class="text-2xl font-bold mb-4 text-center">Regístrate</h2>
+    <p class="text-gray-300 mb-6 text-center">
+      Únete a la lista de espera exclusiva de MarbezShop 🚀
+    </p>
+
+    <!-- Formulario -->
+    <form (ngSubmit)="submitForm()" [formGroup]="form" class="space-y-4">
+      <div>
+        <input
+          formControlName="correo"
+          type="email"
+          placeholder="Correo"
+          required
+          class="w-full px-4 py-2 rounded-lg text-white bg-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        />
+      </div>
+      <div>
+        <input
+          formControlName="nombres"
+          type="text"
+          placeholder="Nombres"
+          required
+          class="w-full px-4 py-2 rounded-lg text-white bg-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        />
+      </div>
+      <div>
+        <input
+          formControlName="apellidos"
+          type="text"
+          placeholder="Apellidos"
+          required
+          class="w-full px-4 py-2 rounded-lg text-white bg-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        />
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 rounded-lg transition flex items-center justify-center gap-2"
+      >
+        <span *ngIf="!loading">Registrarme</span>
+        <svg
+          *ngIf="loading"
+          class="animate-spin h-5 w-5 text-black"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
+      </button>
+    </form>
+
+    <!-- Mensaje de éxito -->
+    <div *ngIf="submitted" class="mt-6 text-center text-green-400 font-bold">
+      ¡Gracias por registrarte! 🎉
+    </div>
+  </div>
+</div>

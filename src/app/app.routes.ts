@@ -9,16 +9,25 @@ import { Register } from './pages/auth/register/register';
 import { Cart } from './pages/cart/cart';
 import { authGuard } from './shared/guards/auth-guard';
 import { Checkout } from './pages/checkout/checkout';
+import { Landing } from './pages/landing/landing';
+
+const eventDeadline = new Date('2025-10-05T20:30:00');
 
 export const routes: Routes = [
-    { path: '', component: Home },
-    { path: 'blog', component: Blog },
-    { path: 'categories', component: Categories },
-    { path: 'category/:id', component: CategoryPage },
-    { path: 'product/:id', component: ProductPage },
-    { path: 'auth/login', component: Login },
-    { path: 'auth/register', component: Register },
-    { path: 'cart', component: Cart },
-    { path: 'checkout', canActivate: [authGuard],component: Checkout},
-    { path: '**', redirectTo: ''},
+  {
+    path: '',
+    redirectTo: new Date() < eventDeadline ? 'landing' : 'home',
+    pathMatch: 'full',
+  },
+  { path: 'landing', component: Landing },
+  { path: 'home', component: Home },
+  { path: 'blog', component: Blog },
+  { path: 'categories', component: Categories },
+  { path: 'category/:id', component: CategoryPage },
+  { path: 'product/:id', component: ProductPage },
+  { path: 'auth/login', component: Login },
+  { path: 'auth/register', component: Register },
+  { path: 'cart', component: Cart },
+  { path: 'checkout', canActivate: [authGuard], component: Checkout },
+  { path: '**', redirectTo: '' },
 ];
