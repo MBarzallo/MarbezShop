@@ -11,12 +11,12 @@ import { authGuard } from './shared/guards/auth-guard';
 import { Checkout } from './pages/checkout/checkout';
 import { Landing } from './pages/landing/landing';
 
-const eventDeadline = new Date('2025-10-05T20:30:00');
+const eventDeadline = new Date('2025-10-06T20:30:00');
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: new Date() < eventDeadline ? 'landing' : 'home',
     pathMatch: 'full',
   },
   { path: 'landing', component: Landing },

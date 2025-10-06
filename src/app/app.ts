@@ -12,10 +12,10 @@ import { CommonModule } from '@angular/common';
 export class App {
   protected title = 'MarbezShop';
     // fecha límite del landing
-  private deadline = new Date('2025-10-05T20:30:00');
+  private deadline = new Date('2025-10-06T20:30:00');
 
   // true si estamos antes de la fecha → mostrar landing
   get isLandingActive(): boolean {
-    return false;
+    return this.deadline > new Date();
   }
 }
