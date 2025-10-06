@@ -10,13 +10,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Option, ProductoDetallado } from '../../models/product';
 import { ProductsService } from '../../shared/services/products/products-service';
 import { CartService } from '../../shared/services/cart/car-service';
+import { ProductReviews } from "../product-reviews/product-reviews";
 
 // Utilidad para key de query/estado: "Talla" → "talla", "Peso Neto" → "peso-neto"
 
 @Component({
   selector: 'app-product-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, CurrencyPipe, NgIf, NgFor, NgClass],
+  imports: [CommonModule, RouterLink, CurrencyPipe, NgIf, NgFor, NgClass, ProductReviews],
   templateUrl: './product-page.html',
   styleUrls: ['./product-page.css'],
 })
@@ -24,6 +25,7 @@ export class ProductPage implements OnInit {
   WA_NUMBER = '593999762586';
   showMore: boolean |null = null;
   loading: boolean = false;
+  code: string ="";
 
   product: ProductoDetallado | null = null;
   options: Option[] = []; // [{name:'Talla', values:[...]}, ...]
@@ -42,6 +44,7 @@ export class ProductPage implements OnInit {
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
+    this.code = id;
     this.loading = true;
     await this.loadProduct(id);
     this.loading = false;

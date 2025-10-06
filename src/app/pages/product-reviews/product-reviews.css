@@ -1,0 +1,6 @@
+.star {
+  opacity: .35;
+  transition: transform .12s ease, opacity .12s ease;
+}
+.star:hover { transform: scale(1.12); }
+.star-active { opacity: 1; }

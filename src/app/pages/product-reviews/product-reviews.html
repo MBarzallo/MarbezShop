@@ -1,0 +1,110 @@
+<!-- Wrapper -->
+<div class="max-w-5xl w-full mx-auto">
+
+  <!-- Header: título + promedio + barras -->
+  <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-5 md:p-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <h3 class="text-2xl font-extrabold text-[#112A4B]">Reseñas</h3>
+        <p class="text-sm text-gray-600 mt-1">
+          Promedio: <b>{{ avgRounded }}</b> <span class="text-gray-400">({{ stats?.total_reviews || 0 }} reseñas)</span>
+        </p>
+      </div>
+
+      <!-- Medallón promedio -->
+      <div class="flex items-center gap-4">
+        <div class="relative flex items-center justify-center w-16 h-16 rounded-full bg-[#FFF4B3] border border-[#FFCC00]/50">
+          <span class="text-xl font-bold text-[#112A4B]">{{ avgRounded }}</span>
+        </div>
+        <!-- mini stars -->
+        <div class="text-xl leading-none text-[#112A4B]">
+          <ng-container *ngFor="let s of [1,2,3,4,5]; let i = index">
+            <span [class.opacity-30]="(stats?.avg_rating || 0) < (i+0.5)">★</span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- Distribución por estrellas -->
+    <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div *ngFor="let star of [5,4,3,2,1]" class="flex items-center gap-3">
+        <div class="w-10 text-sm text-[#112A4B] font-medium">{{ star }}★</div>
+        <div class="flex-1 h-2 rounded-full bg-gray-200 overflow-hidden">
+          <div class="h-2 rounded-full bg-[#FFCC00]" [style.width.%]="starPercent(star)"></div>
+        </div>
+        <div class="w-12 text-right text-xs text-gray-600">{{ starPercent(star) }}%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario -->
+  <div class="mt-6 rounded-2xl border border-gray-200 bg-white shadow-sm p-5 md:p-6">
+    <!-- Estrellas -->
+    <div class="flex items-center gap-1">
+      <button *ngFor="let s of [1,2,3,4,5]"
+              type="button"
+              (click)="setRating(s)"
+              [attr.aria-label]="'Rate ' + s"
+              class="text-2xl leading-none star"
+              [class.star-active]="s <= rating">
+        ★
+      </button>
+      <span class="ml-2 text-sm text-gray-600">{{ rating }}/5</span>
+    </div>
+
+    <!-- Comentario -->
+    <textarea [(ngModel)]="comment"
+              rows="3"
+              placeholder="Cuéntanos qué tal el producto..."
+              class="w-full mt-3 border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#FFCC00]"></textarea>
+
+    <!-- Enviar -->
+    <div class="mt-3 flex justify-end">
+      <button (click)="submit()"
+              class="inline-flex items-center gap-2 bg-[#FFCC00] hover:bg-[#FFD633] text-[#112A4B] font-semibold py-2.5 px-5 rounded-xl shadow-sm transition">
+        Enviar reseña
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de reseñas -->
+  <div class="mt-6 space-y-4">
+    <div *ngIf="loading" class="text-sm text-gray-500">Cargando reseñas…</div>
+
+    <article *ngFor="let r of reviews; trackBy: trackById"
+             class="rounded-2xl border border-gray-200 bg-white shadow-sm p-5">
+      <header class="flex items-start justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <!-- Avatar simple con inicial -->
+          <div class="w-10 h-10 rounded-full bg-[#112A4B] text-white flex items-center justify-center text-sm font-bold">
+            {{ initials(r.usuario_email) }}
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-[#112A4B]">
+              {{ r.usuario_email || 'Anónimo' }}
+              <span *ngIf="r.verified" class="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">
+                Compra verificada
+              </span>
+            </div>
+            <div class="text-xs text-gray-500">{{ r.created_at | date:'mediumDate' }}</div>
+          </div>
+        </div>
+
+        <!-- Stars de la reseña -->
+        <div class="text-lg text-[#112A4B] leading-none shrink-0">
+          <ng-container *ngFor="let s of [1,2,3,4,5]; let i = index">
+            <span [class.opacity-30]="i+1 > r.rating">★</span>
+          </ng-container>
+        </div>
+      </header>
+
+      <p *ngIf="r.comment" class="mt-3 text-sm text-gray-800">
+        {{ r.comment }}
+      </p>
+    </article>
+
+    <div *ngIf="!loading && reviews.length === 0" class="text-sm text-gray-500 text-center py-8">
+      Aún no hay reseñas para este producto. ¡Sé el primero en opinar!
+    </div>
+  </div>
+</div>

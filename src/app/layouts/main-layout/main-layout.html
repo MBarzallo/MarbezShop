@@ -1,8 +1,41 @@
 <div class="w-full max-w-full">
-
   <app-header class="block sticky top-0 z-50"></app-header>
 
   <div class="w-full">
     <ng-content></ng-content>
+  </div>
+
+  <!-- Botón flotante -->
+  <button class="btn-sugerencias" (click)="abrirModal()">
+    💬
+  </button>
+
+  <!-- Modal de sugerencias -->
+  <div class="modal-sugerencias" *ngIf="mostrarModal">
+    <div class="contenido-modal">
+      <h2 class="text-xl font-semibold mb-2 text-[#112A4B]">💡 Envíanos tu sugerencia</h2>
+
+      <textarea
+        [(ngModel)]="sugerencia"
+        placeholder="Escribe aquí tu sugerencia o comentario..."
+        class="w-full h-28 border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#FFCC00]"
+      ></textarea>
+      <div *ngIf="errorMessage" class="text-red-500 mt-2">{{ errorMessage }}</div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <button
+          class="bg-[#FFCC00] hover:bg-[#FFD633] text-[#112A4B] font-semibold py-2 px-4 rounded-lg"
+          (click)="enviarSugerencia()"
+        >
+          Enviar
+        </button>
+        <button
+          class="border border-[#112A4B] text-[#112A4B] py-2 px-4 rounded-lg"
+          (click)="cerrarModal()"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
   </div>
 </div>
