@@ -11,7 +11,7 @@ import { authGuard } from './shared/guards/auth-guard';
 import { Checkout } from './pages/checkout/checkout';
 import { Landing } from './pages/landing/landing';
 
-const eventDeadline = new Date('2025-10-06T20:30:00');
+const eventDeadline = new Date('2025-10-19T20:30:00');
 
 export const routes: Routes = [
   {

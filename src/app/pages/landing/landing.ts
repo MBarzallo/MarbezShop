@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './landing.css'
 })
 export class Landing implements OnInit, OnDestroy {
-  targetDate = new Date('2025-10-06T20:30:00').getTime();
+  targetDate = new Date('2025-10-19T20:30:00').getTime();
 
   days = 0;
   hours = 0;

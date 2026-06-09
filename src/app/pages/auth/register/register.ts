@@ -15,6 +15,11 @@ export class Register {
   msg = '';
   loading = false;
 
+  showPassword = false;
+
+togglePassword() {
+  this.showPassword = !this.showPassword;
+}
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private auth: AuthService) {

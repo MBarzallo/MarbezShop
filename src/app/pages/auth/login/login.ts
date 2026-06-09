@@ -16,7 +16,11 @@ export class Login {
   loading = false;
 
   form: FormGroup;
+ showPassword = false;
 
+togglePassword() {
+  this.showPassword = !this.showPassword;
+}
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
